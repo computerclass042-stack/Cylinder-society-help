@@ -1,6 +1,12 @@
 import streamlit as st
-from datetime import datetime, timedelta
-import random
+from streamlit_gsheets import GSheetsConnection
+import pandas as pd
+
+conn = st.connection("gsheets", type=GSheetsConnection)
+
+data = conn.read()
+
+st.dataframe(data)
 
 price_per_cylinder = 900
 
@@ -25,4 +31,5 @@ if st.button("Generate OTP & Book"):
     st.write("Delivery Date:", delivery_date.strftime("%d-%m-%Y"))
     st.write("Total Bill: ₹", total_amount)
     st.write("OTP:", otp)
+
 
